@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe App</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js" defer></script>
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Recipes</h1>
+        <button id="logout-btn">Logout</button>
+    </header>
+    <div class="container">
+        <aside id="sidebar">
+            <h2>Filter by Letter</h2>
+            <!-- Letter buttons will be dynamically added here by JavaScript -->
+        </aside>
+        <main id="recipe-list-container">
+            <!-- Recipes will be displayed here -->
+        </main>
+    </div>
+    <footer>
+        <a href="add-recipe.html" id="add-recipe-btn" class="button">Add Recipe</a>
+    </footer>
+
+    <!-- auth.js might not be needed directly on this page if app.js handles auth checks -->
+    <!-- <script src="auth.js"></script> -->
+</body>
+</html>

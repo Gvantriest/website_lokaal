@@ -1,0 +1,269 @@
+/* Styles for the recipe application */
+
+body {
+    font-family: sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+h1 {
+    color: #333;
+}
+
+/* Login Form Styles */
+#login-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 40px auto;
+}
+
+#login-form div {
+    margin-bottom: 15px;
+}
+
+#login-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#login-form input[type="email"],
+#login-form input[type="password"] {
+    width: calc(100% - 22px); /* Account for padding and border */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+#login-form button[type="submit"] {
+    background-color: #5cb85c;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#login-form button[type="submit"]:hover {
+    background-color: #4cae4c;
+}
+
+#error-message {
+    color: red;
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+
+/* General Layout for index.html */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    gap: 20px; /* Space between sidebar and main content */
+}
+
+#sidebar {
+    width: 200px; /* Fixed width for sidebar */
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    height: fit-content; /* Adjust height to content */
+}
+
+#sidebar h2 {
+    margin-top: 0;
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+#recipe-list-container {
+    flex-grow: 1; /* Takes up remaining space */
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+footer {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #ccc;
+    text-align: center;
+}
+
+/* Buttons */
+.button, button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none; /* For <a> tags styled as buttons */
+    font-size: 1em;
+    display: inline-block; /* Ensures padding and margin are respected for <a> */
+}
+
+.button:hover, button:hover {
+    background-color: #0056b3;
+}
+
+#logout-btn {
+    background-color: #dc3545;
+}
+
+#logout-btn:hover {
+    background-color: #c82333;
+}
+
+#add-recipe-btn {
+    background-color: #28a745;
+}
+
+#add-recipe-btn:hover {
+    background-color: #218838;
+}
+
+.filter-btn {
+    display: block; /* Make each button take full width of sidebar */
+    width: calc(100% - 20px); /* Adjust for padding */
+    margin: 5px auto; /* Centered with some vertical space */
+    padding: 8px 10px;
+    background-color: #e9ecef;
+    color: #495057;
+    border: 1px solid #ced4da;
+    text-align: center;
+}
+
+.filter-btn:hover {
+    background-color: #d3d9df;
+}
+
+.filter-btn.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+
+/* Recipe List Styles */
+.recipe-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.recipe-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.recipe-item:last-child {
+    border-bottom: none;
+}
+
+.recipe-item:hover {
+    background-color: #f8f9fa;
+}
+
+#recipe-list-container p {
+    font-style: italic;
+    color: #666;
+}
+/* Add Recipe Form Styles */
+#add-recipe-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 600px; /* Wider for more content */
+    margin: 40px auto;
+}
+
+#add-recipe-form div {
+    margin-bottom: 15px;
+}
+
+#add-recipe-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#add-recipe-form input[type="text"],
+#add-recipe-form textarea {
+    width: calc(100% - 22px); /* Account for padding and border */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: sans-serif; /* Ensure consistent font */
+}
+
+#add-recipe-form textarea {
+    resize: vertical; /* Allow vertical resizing */
+}
+
+#add-recipe-form small {
+    display: block;
+    margin-top: 3px;
+    font-size: 0.85em;
+    color: #666;
+}
+
+#add-recipe-form button[type="submit"] {
+    background-color: #28a745; /* Green for save */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#add-recipe-form button[type="submit"]:hover {
+    background-color: #218838;
+}
+
+#form-message {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+#form-message:empty { /* Hide if empty */
+    display: none;
+}
+
+/* Link back to recipes */
+body > p > a { /* More specific selector if needed */
+    display: inline-block;
+    margin-top: 20px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+body > p > a:hover {
+    text-decoration: underline;
+}

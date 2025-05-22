@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Recipe - Recipe App</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js" defer></script>
+    <script src="auth.js" defer></script>
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <h1>Add New Recipe</h1>
+    <form id="add-recipe-form">
+        <div>
+            <label for="recipe-name">Recipe Name:</label>
+            <input type="text" id="recipe-name" name="recipeName" required>
+        </div>
+        <div>
+            <label for="recipe-ingredients">Ingredients:</label>
+            <textarea id="recipe-ingredients" name="recipeIngredients" rows="5" required placeholder="Enter ingredients, one per line..."></textarea>
+            <small>Enter ingredients, one per line.</small>
+        </div>
+        <div>
+            <label for="recipe-instructions">Instructions:</label>
+            <textarea id="recipe-instructions" name="recipeInstructions" rows="10" required placeholder="Enter instructions, one step per line..."></textarea>
+            <small>Enter instructions, one step per line.</small>
+        </div>
+        <button type="submit" id="save-recipe-btn">Save Recipe</button>
+    </form>
+    <div id="form-message"></div>
+    <p><a href="index.html">Back to Recipes</a></p>
+
+</body>
+</html>
