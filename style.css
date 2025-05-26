@@ -1,22 +1,60 @@
 /* Styles for the recipe application */
 
+:root {
+  --color-primary-black: #1A1A1A; /* Deep charcoal - main background */
+  --color-primary-green: #3A541A; /* Muted green - accents, headers, primary buttons. PLEASE ADJUST TO MATCH LOGO */
+  --color-accent-red: #C83737;    /* Muted red - destructive actions, secondary accents. PLEASE ADJUST TO MATCH LOGO */
+  --color-neutral-white: #FFFFFF; /* Pure white - text on dark, highlights */
+
+  /* Semantic variables */
+  --background-main: var(--color-neutral-white);
+  --background-card: #FFFFFF; /* Slightly lighter than main for cards/containers */
+  --background-sidebar: #222222; /* Darker for sidebar */
+  --background-input: #3C3C3C;
+  --background-hover: #4A4A4A;
+  --background-item-hover: #333333; /* For list items etc. */
+
+  --text-primary: var(--color-primary-black);
+  --text-secondary: #B0B0B0; /* Lighter gray for less important text */
+  --text-on-green: var(--color-neutral-white);
+  --text-on-red: var(--color-neutral-white);
+  --text-placeholder: #888888;
+
+  --border-color: var(--color-prima); /* Dark border for inputs, cards */
+  --border-color-light: #555555;
+
+  --button-primary-bg: var(--color-primary-green);
+  --button-primary-text: var(--text-on-green);
+  --button-primary-hover-bg: #2E4315; /* Darker green */
+
+  --button-danger-bg: var(--color-accent-red);
+  --button-danger-text: var(--text-on-red);
+  --button-danger-hover-bg: #A32D2D; /* Darker red */
+
+  --link-color: var(--color-primary-green);
+  --link-hover-color: #577A2A; /* Lighter green for hover */
+
+  --active-indicator: var(--color-primary-green);
+  --shadow-color: rgba(0, 0, 0, 0.3); /* Darker shadow for dark theme */
+}
+
 body {
     font-family: sans-serif;
     margin: 20px;
-    background-color: #f4f4f4;
-    color: #333;
+    background-color: var(--background-main);
+    color: var(--text-primary);
 }
 
 h1 {
-    color: #333;
+    color: var(--color-primary-green);
 }
 
 /* Login Form Styles */
 #login-form {
-    background-color: #fff;
+    background-color: var(--background-card);
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px var(--shadow-color);
     max-width: 400px;
     margin: 40px auto;
 }
@@ -29,20 +67,28 @@ h1 {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
+    color: var(--text-primary);
 }
 
 #login-form input[type="email"],
 #login-form input[type="password"] {
     width: calc(100% - 22px); /* Account for padding and border */
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 4px;
     box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    background-color: var(--background-input);
+    color: var(--text-primary);
+}
+
+#login-form input[type="email"]::placeholder,
+#login-form input[type="password"]::placeholder {
+    color: var(--text-placeholder);
 }
 
 #login-form button[type="submit"] {
-    background-color: #5cb85c;
-    color: white;
+    background-color: var(--button-primary-bg);
+    color: var(--button-primary-text);
     padding: 10px 15px;
     border: none;
     border-radius: 4px;
@@ -51,11 +97,11 @@ h1 {
 }
 
 #login-form button[type="submit"]:hover {
-    background-color: #4cae4c;
+    background-color: var(--button-primary-hover-bg);
 }
 
 #error-message {
-    color: red;
+    color: var(--color-accent-red);
     margin-top: 10px;
     font-size: 0.9em;
 }
@@ -66,11 +112,16 @@ header {
     justify-content: space-between;
     align-items: center;
     padding-bottom: 20px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid var(--border-color);
     margin-bottom: 20px;
 }
 
-header h1 {
+#header-logo {
+    max-height: 50px; /* Adjust as needed */
+    margin-right: 15px; /* Space between logo and title */
+}
+
+header h1 { /* Already handled by general h1 */
     margin: 0;
 }
 
@@ -80,40 +131,44 @@ header h1 {
 }
 
 #sidebar {
-    width: 200px; /* Fixed width for sidebar */
-    padding: 15px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    width: 220px; /* Slightly wider for folder tab effect */
+    padding: 10px 0; /* Adjust padding, remove side padding for buttons to extend */
+    background-color: var(--background-sidebar);
+    border-radius: 8px 0 0 8px; /* Rounded corners on the left side */
+    box-shadow: 2px 0 5px var(--shadow-color); /* Shadow to give depth */
     height: fit-content; /* Adjust height to content */
+    display: flex;
+    flex-direction: column;
 }
 
 #sidebar h2 {
     margin-top: 0;
     font-size: 1.2em;
-    color: #333;
+    color: var(--color-primary-green); /* Changed from #333 */
     margin-bottom: 15px;
+    padding-left: 15px; /* Align with filter buttons */
 }
 
 #recipe-list-container {
     flex-grow: 1; /* Takes up remaining space */
     padding: 15px;
-    background-color: #fff;
+    background-color: var(--background-card);
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 4px var(--shadow-color);
 }
 
 footer {
     margin-top: 30px;
     padding-top: 20px;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid var(--border-color);
     text-align: center;
+    color: var(--text-secondary);
 }
 
 /* Buttons */
-.button, button {
-    background-color: #007bff;
-    color: white;
+.button, button { /* General button styling */
+    background-color: var(--button-primary-bg);
+    color: var(--button-primary-text);
     padding: 10px 15px;
     border: none;
     border-radius: 4px;
@@ -123,45 +178,55 @@ footer {
     display: inline-block; /* Ensures padding and margin are respected for <a> */
 }
 
-.button:hover, button:hover {
-    background-color: #0056b3;
+.button:hover, button:hover { /* General button hover */
+    background-color: var(--button-primary-hover-bg);
 }
 
 #logout-btn {
-    background-color: #dc3545;
+    background-color: var(--button-danger-bg);
+    color: var(--button-danger-text); /* Ensure text color is set if different from general button */
 }
 
 #logout-btn:hover {
-    background-color: #c82333;
+    background-color: var(--button-danger-hover-bg);
 }
 
-#add-recipe-btn {
-    background-color: #28a745;
+#add-recipe-btn { /* This is a general button, should inherit .button styles */
+    /* background-color: #28a745; */ /* Will use var(--button-primary-bg) */
 }
 
-#add-recipe-btn:hover {
-    background-color: #218838;
+#add-recipe-btn:hover { /* Will use var(--button-primary-hover-bg) */
+    /* background-color: #218838; */
 }
 
 .filter-btn {
-    display: block; /* Make each button take full width of sidebar */
-    width: calc(100% - 20px); /* Adjust for padding */
-    margin: 5px auto; /* Centered with some vertical space */
-    padding: 8px 10px;
-    background-color: #e9ecef;
-    color: #495057;
-    border: 1px solid #ced4da;
-    text-align: center;
+    display: block;
+    width: 100%;
+    padding: 12px 15px 12px 25px; /* More padding, especially left for folder tab feel */
+    margin: 0; /* Remove vertical margins */
+    background-color: transparent; /* Transparent background */
+    color: var(--text-secondary); /* Lighter text for non-active filters */
+    border: none; /* Remove default border */
+    border-left: 5px solid transparent; /* Placeholder for active state */
+    text-align: left; /* Align text to the left */
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.2s ease, border-left-color 0.2s ease, color 0.2s ease;
+    border-radius: 0; /* No rounded corners for individual buttons */
 }
 
 .filter-btn:hover {
-    background-color: #d3d9df;
+    background-color: var(--background-hover);
+    color: var(--text-primary);
+    border-left-color: var(--active-indicator); /* Show a hint of the active color on hover */
 }
 
 .filter-btn.active {
-    background-color: #007bff;
-    color: white;
-    border-color: #007bff;
+    background-color: var(--background-card); /* Match card background for "inset" feel */
+    color: var(--active-indicator); /* Active color for text */
+    border-left: 5px solid var(--active-indicator); /* Prominent left border for active tab */
+    font-weight: bold;
+    box-shadow: inset 3px 0px 5px -2px var(--shadow-color); /* Inner shadow for depth */
 }
 
 
@@ -173,8 +238,10 @@ footer {
 
 .recipe-item {
     padding: 10px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--border-color-light);
     cursor: pointer;
+    color: var(--text-primary); /* Ensure text color is appropriate */
+    transition: background-color 0.2s ease;
 }
 
 .recipe-item:last-child {
@@ -182,19 +249,19 @@ footer {
 }
 
 .recipe-item:hover {
-    background-color: #f8f9fa;
+    background-color: var(--background-item-hover);
 }
 
-#recipe-list-container p {
+#recipe-list-container p { /* e.g. "No recipes found" message */
     font-style: italic;
-    color: #666;
+    color: var(--text-secondary);
 }
 /* Add Recipe Form Styles */
 #add-recipe-form {
-    background-color: #fff;
+    background-color: var(--background-card);
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px var(--shadow-color);
     max-width: 600px; /* Wider for more content */
     margin: 40px auto;
 }
@@ -207,16 +274,24 @@ footer {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
+    color: var(--text-primary);
 }
 
 #add-recipe-form input[type="text"],
 #add-recipe-form textarea {
     width: calc(100% - 22px); /* Account for padding and border */
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 4px;
     box-sizing: border-box;
     font-family: sans-serif; /* Ensure consistent font */
+    background-color: var(--background-input);
+    color: var(--text-primary);
+}
+
+#add-recipe-form input[type="text"]::placeholder,
+#add-recipe-form textarea::placeholder {
+    color: var(--text-placeholder);
 }
 
 #add-recipe-form textarea {
@@ -227,12 +302,12 @@ footer {
     display: block;
     margin-top: 3px;
     font-size: 0.85em;
-    color: #666;
+    color: var(--text-secondary);
 }
 
-#add-recipe-form button[type="submit"] {
-    background-color: #28a745; /* Green for save */
-    color: white;
+#add-recipe-form button[type="submit"] { /* Should use general .button styles */
+    background-color: var(--button-primary-bg);
+    color: var(--button-primary-text);
     padding: 10px 15px;
     border: none;
     border-radius: 4px;
@@ -241,16 +316,31 @@ footer {
 }
 
 #add-recipe-form button[type="submit"]:hover {
-    background-color: #218838;
+    background-color: var(--button-primary-hover-bg);
 }
 
-#form-message {
+#form-message { /* For success/error messages in forms */
     margin-top: 15px;
     padding: 10px;
     border-radius: 4px;
     font-size: 0.9em;
     text-align: center;
+    /* Specific colors for success/error can be added via JS by adding classes */
+    /* e.g., .form-message-success, .form-message-error */
+    background-color: var(--background-input); /* Default subtle background */
+    color: var(--text-primary);
 }
+
+#form-message.success {
+    background-color: var(--color-primary-green);
+    color: var(--text-on-green);
+}
+
+#form-message.error {
+    background-color: var(--color-accent-red);
+    color: var(--text-on-red);
+}
+
 
 #form-message:empty { /* Hide if empty */
     display: none;
@@ -260,10 +350,11 @@ footer {
 body > p > a { /* More specific selector if needed */
     display: inline-block;
     margin-top: 20px;
-    color: #007bff;
+    color: var(--link-color);
     text-decoration: none;
 }
 
 body > p > a:hover {
     text-decoration: underline;
+    color: var(--link-hover-color);
 }
