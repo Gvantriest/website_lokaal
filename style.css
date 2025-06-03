@@ -9,18 +9,19 @@
   /* Semantic variables */
   --background-main: var(--color-neutral-white);
   --background-card: #FFFFFF; /* Slightly lighter than main for cards/containers */
-  --background-sidebar: #222222; /* Darker for sidebar */
-  --background-input: #3C3C3C;
-  --background-hover: #4A4A4A;
+  --background-recipelist: #FFEBEE; /* Light gray for recipe list background */
+  --background-sidebar: #F0FFF0; /* Darker for sidebar */
+  --background-input: #FFEBEE;
+  --background-hover: #D4EDDA;
   --background-item-hover: #333333; /* For list items etc. */
 
   --text-primary: var(--color-primary-black);
-  --text-secondary: #B0B0B0; /* Lighter gray for less important text */
+  --text-secondary: #3A541A; /* Lighter gray for less important text */
   --text-on-green: var(--color-neutral-white);
   --text-on-red: var(--color-neutral-white);
   --text-placeholder: #888888;
 
-  --border-color: var(--color-prima); /* Dark border for inputs, cards */
+  --border-color: var(--color-primary-black); /* Dark border for inputs, cards */
   --border-color-light: #555555;
 
   --button-primary-bg: var(--color-primary-green);
@@ -40,9 +41,12 @@
 
 body {
     font-family: sans-serif;
-    margin: 20px;
+    margin: 0; /* Remove default margin */
     background-color: var(--background-main);
     color: var(--text-primary);
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh; /* Ensure body takes full viewport height */
 }
 
 h1 {
@@ -114,24 +118,53 @@ header {
     padding-bottom: 20px;
     border-bottom: 1px solid var(--border-color);
     margin-bottom: 20px;
+    flex-shrink: 0; /* Ensure header doesn't shrink */
 }
 
 #header-logo {
     max-height: 50px; /* Adjust as needed */
-    margin-right: 15px; /* Space between logo and title */
+    /* margin-right: 15px; /* No longer needed as title is removed and space-between handles distribution */
 }
 
-header h1 { /* Already handled by general h1 */
-    margin: 0;
+/* header h1 rule removed as h1 is no longer in the header */
+
+header > .button { /* Style for the "Add Recipe" button in the header */
+    margin-right: 10px; /* Space between Add Recipe and Logout buttons */
 }
 
 .container {
     display: flex;
-    gap: 20px; /* Space between sidebar and main content */
+    flex-direction: column; /* Stack search-bar and content-columns vertically */
+    gap: 20px; /* Space between search-bar and content-columns */
+    padding-left: 20px; /* Add space on the left */
+    padding-right: 20px; /* Add space on the right */
+    box-sizing: border-box; /* Ensure padding doesn't add to overall width for body scrolling */
+}
+
+.content-columns {
+    display: flex;
+    gap: 20px; /* Space between sidebar and recipe-list-container */
+}
+
+#search-bar {
+    width: 100%; /* Make search bar full width */
+    padding: 10px;
+    margin-bottom: 20px; /* Space below the search bar */
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1em;
+    background-color: var(--background-input);
+    color: var(--text-primary);
+}
+
+#search-bar::placeholder {
+    color: var(--text-placeholder);
 }
 
 #sidebar {
     width: 220px; /* Slightly wider for folder tab effect */
+    flex-shrink: 0; /* Prevent sidebar from shrinking */
     padding: 10px 0; /* Adjust padding, remove side padding for buttons to extend */
     background-color: var(--background-sidebar);
     border-radius: 8px 0 0 8px; /* Rounded corners on the left side */
@@ -139,6 +172,7 @@ header h1 { /* Already handled by general h1 */
     height: fit-content; /* Adjust height to content */
     display: flex;
     flex-direction: column;
+    /* z-index: 1; /* Removed to address mobile stacking issues, may need desktop modal re-check */
 }
 
 #sidebar h2 {
@@ -152,7 +186,7 @@ header h1 { /* Already handled by general h1 */
 #recipe-list-container {
     flex-grow: 1; /* Takes up remaining space */
     padding: 15px;
-    background-color: var(--background-card);
+    background-color: var(--background-recipelist);
     border-radius: 8px;
     box-shadow: 0 2px 4px var(--shadow-color);
 }
@@ -242,6 +276,10 @@ footer {
     cursor: pointer;
     color: var(--text-primary); /* Ensure text color is appropriate */
     transition: background-color 0.2s ease;
+    background-color: var(--color-neutral-white);
+    border-color: var(--color-primary-black);
+    border-width: 2px;
+    border-radius: 4px;
 }
 
 .recipe-item:last-child {
@@ -249,7 +287,7 @@ footer {
 }
 
 .recipe-item:hover {
-    background-color: var(--background-item-hover);
+    background-color: var(--background-sidebar); /* Lighter hover effect */
 }
 
 #recipe-list-container p { /* e.g. "No recipes found" message */
@@ -424,4 +462,49 @@ body > p > a:hover {
     content: "";
     clear: both;
     display: table;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 600px) {
+    /* User wants the layout to remain the same.
+       The .container is already flex-direction: column.
+       The .content-columns is display: flex (row).
+       If this row layout is too cramped on mobile, we might need to stack .content-columns too.
+       For now, per "stays the same", we keep .content-columns as a row.
+       We might need to adjust sidebar width or make it scrollable if content is too wide.
+    */
+
+    .content-columns {
+        /* If stacking is preferred on mobile for sidebar and recipe list: */
+        /* flex-direction: column; */
+    }
+
+    #sidebar {
+        /* If .content-columns stacks, sidebar would need width: 100% */
+        /* width: 100%; */
+        /* margin-bottom: 15px; */ /* If stacked */
+        /* max-height: none; */ /* Remove max-height if stacked and scrolling is desired */
+        /* Consider making sidebar scrollable if it's too tall and fixed width */
+        overflow-y: auto; /* Allow sidebar to scroll if its content is too tall */
+        max-height: 70vh; /* Example max height for scrollable sidebar on mobile */
+    }
+
+
+    #recipe-list-container {
+         /* If .content-columns stacks, recipe list would need width: 100% */
+        /* width: 100%; */
+        /* min-height: auto; */ /* Adjust as needed if stacked */
+    }
+
+    /* The existing rules for #sidebar and #recipe-list-container for mobile
+       made them full width and stacked them.
+       If the side-by-side view of sidebar and recipe-list is to be maintained,
+       those specific width: 100% and flex-direction: column on .container
+       (which is now handled by the main .container rule) are not strictly needed
+       in the same way. The main concern is if 220px sidebar + gap + recipe list fits.
+       If not, the .content-columns might need to wrap or stack.
+       Let's keep the current responsive rules for #sidebar width and #recipe-list-container width
+       commented out for now, to see how the desktop layout behaves on smaller screens first.
+       The primary change is that .container now handles the main stacking.
+    */
 }

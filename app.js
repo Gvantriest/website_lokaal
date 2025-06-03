@@ -166,7 +166,7 @@ async function handleAddRecipeFormSubmit(event) {
 }
 
 // --- Recipe Fetching ---
-async function fetchRecipes(filterLetter = null) {
+async function fetchRecipes(filterLetter = null, searchTerm = null) {
     if (typeof window.supabaseClient === 'undefined') {
         console.error('fetchRecipes: window.supabaseClient is not defined.');
         return [];
@@ -183,7 +183,9 @@ async function fetchRecipes(filterLetter = null) {
             .select('id, name, ingredients, instructions')
             .eq('user_id', user.id);
 
-        if (filterLetter) {
+        if (searchTerm) {
+            query = query.ilike('name', `%${searchTerm}%`);
+        } else if (filterLetter) {
             query = query.ilike('name', `${filterLetter}%`);
         }
 
@@ -350,8 +352,8 @@ async function handleFilterClick(event, recipeListContainerElement, sidebarEleme
 }
 
 // --- Initial Load & Event Listeners ---
-async function loadInitialRecipes(recipeListContainerElement, sidebarElement) {
-    const recipes = await fetchRecipes(); // Load all initially
+async function loadInitialRecipes(recipeListContainerElement, sidebarElement, searchTerm = null) {
+    const recipes = await fetchRecipes(null, searchTerm); // Load all initially or based on search
     displayRecipes(recipes, recipeListContainerElement, sidebarElement);
 }
 
@@ -383,6 +385,18 @@ document.addEventListener('DOMContentLoaded', async () => {
                 generateFilterButtons(sidebar);
                 await loadInitialRecipes(recipeListContainer, sidebar);
                 sidebar.addEventListener('click', (event) => handleFilterClick(event, recipeListContainer, sidebar));
+
+                const searchBar = document.getElementById('search-bar');
+                if (searchBar) {
+                    searchBar.addEventListener('input', async (event) => {
+                        const searchTerm = event.target.value.trim();
+                        // Clear active filter button when searching
+                        if (sidebar) {
+                            sidebar.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                        }
+                        await loadInitialRecipes(recipeListContainer, sidebar, searchTerm);
+                    });
+                }
             } else {
                 if (recipeListContainer) recipeListContainer.innerHTML = '<p>Please <a href="login.html">log in</a> to view recipes.</p>';
             }
