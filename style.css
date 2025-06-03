@@ -358,3 +358,70 @@ body > p > a:hover {
     text-decoration: underline;
     color: var(--link-hover-color);
 }
+/* Recipe Modal Styles */
+.recipe-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it's on top */
+}
+
+.recipe-modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 500px; /* Max width for the modal */
+    max-height: 80vh; /* Max height */
+    overflow-y: auto; /* Scroll if content is too long */
+    position: relative; /* For positioning the close button if needed */
+}
+
+.recipe-modal-content h2 {
+    margin-top: 0;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.recipe-modal-content h3 {
+    color: #555;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.recipe-modal-content p {
+    color: #666;
+    line-height: 1.6;
+    white-space: pre-wrap; /* Preserve line breaks from the input */
+}
+
+.recipe-modal-close-btn {
+    display: block;
+    margin-top: 20px;
+    padding: 10px 15px;
+    background-color: #d9534f; /* A nice red, similar to logout */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    float: right; /* Align to the right */
+}
+
+.recipe-modal-close-btn:hover {
+    background-color: #c9302c;
+}
+
+/* Clearfix for the modal content if floating elements are used extensively */
+.recipe-modal-content::after {
+    content: "";
+    clear: both;
+    display: table;
+}

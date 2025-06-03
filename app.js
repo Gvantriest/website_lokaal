@@ -230,11 +230,69 @@ function displayRecipes(recipes, recipeListContainerElement, sidebarElement) {
         li.textContent = recipe.name;
         // Optional: Add click to show details
         li.addEventListener('click', () => {
-            alert(`Recipe: ${recipe.name}\n\nIngredients: ${recipe.ingredients}\n\nInstructions: ${recipe.instructions}`);
+            showRecipeModal(recipe);
         });
         ul.appendChild(li);
     });
     recipeListContainerElement.appendChild(ul);
+}
+
+// --- Recipe Modal Display ---
+function showRecipeModal(recipe) {
+    // Remove existing modal if any
+    const existingModal = document.getElementById('recipe-modal-overlay');
+    if (existingModal) {
+        existingModal.remove();
+    }
+
+    // Create modal overlay
+    const modalOverlay = document.createElement('div');
+    modalOverlay.id = 'recipe-modal-overlay';
+    modalOverlay.className = 'recipe-modal-overlay';
+
+    // Create modal content
+    const modalContent = document.createElement('div');
+    modalContent.className = 'recipe-modal-content';
+
+    // Recipe Name
+    const recipeNameElement = document.createElement('h2');
+    recipeNameElement.textContent = recipe.name;
+    modalContent.appendChild(recipeNameElement);
+
+    // Ingredients
+    const ingredientsTitle = document.createElement('h3');
+    ingredientsTitle.textContent = 'Ingredients:';
+    modalContent.appendChild(ingredientsTitle);
+    const ingredientsElement = document.createElement('p');
+    ingredientsElement.textContent = recipe.ingredients;
+    modalContent.appendChild(ingredientsElement);
+
+    // Instructions
+    const instructionsTitle = document.createElement('h3');
+    instructionsTitle.textContent = 'Instructions:';
+    modalContent.appendChild(instructionsTitle);
+    const instructionsElement = document.createElement('p');
+    instructionsElement.textContent = recipe.instructions;
+    modalContent.appendChild(instructionsElement);
+
+    // Close button
+    const closeButton = document.createElement('button');
+    closeButton.textContent = 'Close';
+    closeButton.className = 'recipe-modal-close-btn';
+    closeButton.onclick = () => {
+        modalOverlay.remove();
+    };
+    modalContent.appendChild(closeButton);
+
+    modalOverlay.appendChild(modalContent);
+    document.body.appendChild(modalOverlay);
+
+    // Optional: Close modal if overlay is clicked
+    modalOverlay.addEventListener('click', function(event) {
+        if (event.target === modalOverlay) {
+            modalOverlay.remove();
+        }
+    });
 }
 
 // --- Filter Buttons ---
